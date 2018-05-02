@@ -3,15 +3,15 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Yi Li.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,41 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    original_x = circle.center.x
+    original_y = circle.center.y
+    radius = circle.radius
+
+    x = original_x
+    y = original_y
+
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+            x = x + radius * 2
+
+        x = original_x
+        y = y + radius * 2
+
+    corner_x = original_x
+    corner_y = original_y + radius * 2 * r
+    x1 = corner_x
+    y1 = corner_y
+
+    for k in range(3):
+        for j in range(c + 3):
+            new_circle = rg.Circle(rg.Point(x1, y1), radius)
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+            x1 = x1 + radius * 2
+        x1 = corner_x
+        y1 = y1 + 2 * radius
 
 
 def run_test_draw_wall_on_right():
@@ -124,6 +156,29 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+
+    center = rectangle.get_center()
+    original_x = center.x
+    original_y = center.y
+
+    x = original_x
+    y = original_y
+
+    height = rectangle.get_height()
+    width = rectangle.get_width()
+
+    for k in range(1, n + 1):
+        for j in range(1, k + 1):
+            new_center = rg.Point(x, y)
+            new_rectangle = rg.Rectangle(new_center, width, height)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+
+            x = x - width
+            y = y
+
+        x = original_x
+        y = y + height
 
 
 # ----------------------------------------------------------------------
