@@ -153,11 +153,11 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
-    center = rectangle.get_center()
+    center = rectangle.get_upper_right_corner()
     original_x = center.x
     original_y = center.y
 
@@ -169,8 +169,9 @@ def draw_wall_on_right(rectangle, n, window):
 
     for k in range(1, n + 1):
         for j in range(1, k + 1):
-            new_center = rg.Point(x, y)
-            new_rectangle = rg.Rectangle(new_center, width, height)
+            c1 = rg.Point(x, y)
+            c2 = rg.Point(x - width, y + height)
+            new_rectangle = rg.Rectangle(c1, c2)
             new_rectangle.attach_to(window)
             window.render(0.1)
 
